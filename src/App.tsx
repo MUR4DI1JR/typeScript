@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useRef, useState} from 'react';
+import axios from "axios";
+import EventsExample from "./components/EventsExample";
+import { BrowserRouter as Router, useRoutes} from "react-router-dom";
+import UserPage from "./components/UserPage";
+import TodoPage from "./components/todoPage";
+import MainPage from "./components/mainPage";
+import UserItemPage from "./components/UserItemPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+const App = () =>{
+    const routes = useRoutes([
+        {path: '/', element: <MainPage/>},
+        {path: '/users', element: <UserPage/>},
+        {path: '/users/:id', element: <UserItemPage/>},
+        {path: '/todos', element: <TodoPage/>},
+    ])
+    return (
+        routes
+    );
+};
+
+const AppWrapper = () => {
+    return (
+        <Router>
+            <App />
+        </Router>
+    );
+};
+
+export default AppWrapper;
